@@ -7,17 +7,24 @@ import numpy as np
 class pylia:
     """
     Python wrapper for the LIA executable.
-    LIA: https://github.com/daigokk/LIA/tree/master
+
     This class provides an interface to communicate with the LIA binary via subprocess piping.
     It allows sending commands, receiving responses, and retrieving measurement data.
+
+    References
+    ----------
+    LIA project: https://github.com/daigokk/LIA/tree/master
     """
 
     def __init__(self, option=''):
         """
         Initialize the LIA subprocess with optional command-line arguments.
 
-        Args:
-            option (str): When the option is 'nogui', Headless mode is used.
+        Parameters
+        ----------
+        option : str, optional
+            Command-line argument passed to the LIA executable.
+            Use 'nogui' to enable headless mode.
         """
         exe_path = os.path.join(os.path.dirname(__file__), 'bin', 'lia.exe')
         self.process = subprocess.Popen(
@@ -31,7 +38,8 @@ class pylia:
     def __del__(self):
         """
         Destructor to safely terminate the LIA subprocess.
-        Sends 'end' command and kills the process after a short delay.
+
+        Sends the 'end' command and kills the process after a short delay.
         """
         self._send('end')
         time.sleep(1)
@@ -41,8 +49,10 @@ class pylia:
         """
         Send a command string to the LIA process.
 
-        Args:
-            cmd (str): Command to send.
+        Parameters
+        ----------
+        cmd : str
+            Command to send.
         """
         self.process.stdin.write(f'{cmd}\n')
         self.process.stdin.flush()
@@ -51,8 +61,10 @@ class pylia:
         """
         Receive a single line of response from the LIA process.
 
-        Returns:
-            str: Response string without trailing newline.
+        Returns
+        -------
+        str
+            Response string without trailing newline.
         """
         self.process.stdout.flush()
         return self.process.stdout.readline()[:-1]
@@ -61,11 +73,15 @@ class pylia:
         """
         Send a command and wait for the response.
 
-        Args:
-            cmd (str): Command to send.
+        Parameters
+        ----------
+        cmd : str
+            Command to send.
 
-        Returns:
-            str: Response from the LIA process.
+        Returns
+        -------
+        str
+            Response from the LIA process.
         """
         self._send(cmd)
         return self._recieve()
@@ -74,8 +90,9 @@ class pylia:
         """
         Print help information from the LIA process.
 
-        Returns:
-            None
+        Returns
+        -------
+        None
         """
         size = int(self._query('help:size?'))
         self._send('help?')
@@ -86,8 +103,10 @@ class pylia:
         """
         Query the device identification string.
 
-        Returns:
-            str: Identification string.
+        Returns
+        -------
+        str
+            Identification string.
         """
         return self._query('*idn?')
 
@@ -95,8 +114,9 @@ class pylia:
         """
         Send reset command to the device.
 
-        Returns:
-            None
+        Returns
+        -------
+        None
         """
         self._send('*rst')
 
@@ -104,8 +124,9 @@ class pylia:
         """
         Pause the device operation.
 
-        Returns:
-            None
+        Returns
+        -------
+        None
         """
         self._send('pause')
 
@@ -113,8 +134,9 @@ class pylia:
         """
         Resume or start the device operation.
 
-        Returns:
-            None
+        Returns
+        -------
+        None
         """
         self._send('run')
 
@@ -122,8 +144,10 @@ class pylia:
         """
         Retrieve raw data from the device.
 
-        Returns:
-            np.ndarray: 2D array of float values.
+        Returns
+        -------
+        numpy.ndarray
+            2D array of float values.
         """
         dat = []
         size = int(self._query(':data:raw:size?'))
@@ -136,8 +160,10 @@ class pylia:
         """
         Retrieve XY data from the device.
 
-        Returns:
-            list: List of two or four float values [X0, Y0] or [X0, Y0, X1, Y1].
+        Returns
+        -------
+        list of float
+            List of two or four float values [X0, Y0] or [X0, Y0, X1, Y1].
         """
         return list(map(float, self._query(':data:xy?').split(',')))
 
@@ -145,11 +171,15 @@ class pylia:
         """
         Retrieve time-series XY data for a given duration.
 
-        Args:
-            sec (int): Duration in seconds to collect data.
+        Parameters
+        ----------
+        sec : int, optional
+            Duration in seconds to collect data. Default is 0.
 
-        Returns:
-            np.ndarray: 3D or 5D array of float values.
+        Returns
+        -------
+        numpy.ndarray
+            2D array of shape (N, 3) or (N, 5), where N is the number of samples.
         """
         dat = []
         size = int(self._query(f':data:txy? {sec}'))
@@ -161,8 +191,10 @@ class pylia:
         """
         Get the frequency of the function generator 'W1'.
 
-        Returns:
-            float: Frequency value.
+        Returns
+        -------
+        float
+            Frequency value.
         """
         return float(self._query(':w1:freq?'))
 
@@ -170,7 +202,9 @@ class pylia:
         """
         Set the frequency of the function generator 'W1'.
 
-        Args:
-            freq (float): Frequency value to set.
+        Parameters
+        ----------
+        freq : float
+            Frequency value to set.
         """
-        self._send(f':w1:freq {freq}\n'
+        self._send(f':w1:freq {freq}\n')
