@@ -23,7 +23,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pylia"]
+include = ["pyliamp"]
 
 [tool.setuptools.package-data]
-pylia = ["bin/lia.exe"]
+pyliamp = ["pyliamp/bin/lia.exe"]
