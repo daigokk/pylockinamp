@@ -3,7 +3,7 @@ Python wrapper of LIA
 
 ## Usage
 1. Install Dependencies
-    - Digilent WaveForms SDK
+    - [Digilent WaveForms SDK](https://digilent.com/reference/software/waveforms/waveforms-sdk/start)
 1. Hardware Setup
     - Connect Analog Discovery 2 or 3 to your PC
     - Example wiring:
