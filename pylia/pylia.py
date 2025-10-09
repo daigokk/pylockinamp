@@ -137,7 +137,7 @@ class pylia:
         Retrieve XY data from the device.
 
         Returns:
-            list: List of two or four float values [X, Y].
+            list: List of two or four float values [X0, Y0] or [X0, Y0, X1, Y1].
         """
         return list(map(float, self._query(':data:xy?').split(',')))
 
