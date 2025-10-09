@@ -1,6 +1,6 @@
 import platform
 import sys
-from .pylia import pylia
+from .pyliamp import pyliamp
 
 if platform.system() != 'Windows':
     sys.exit("This package is for Windows only.")
