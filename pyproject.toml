@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pylia"
+name = "pyliamp"
 version = "2.0.0"
 description = "Python wrapper of LIA"
 readme = "README.md"
@@ -16,7 +16,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/daigokk/pylia"
+Homepage = "https://github.com/daigokk/pyliamp"
 
 [tool.setuptools]
 include-package-data = true
