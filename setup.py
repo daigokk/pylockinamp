@@ -17,6 +17,6 @@ setup(
         'Operating System :: Microsoft :: Windows',
     ],
     install_requires=[
-        numpy,
+        'numpy',
     ],
 )
