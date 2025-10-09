@@ -1,4 +1,4 @@
-# pylia
+# pyliamp
     Python wrapper of LIA project: https://github.com/daigokk/LIA/
 ## Usage
 1. Install Dependencies
