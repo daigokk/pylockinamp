@@ -14,7 +14,7 @@ Python wrapper of LIA
     > pip install -U git+https://github.com/daigokk/pylia.git
     ```
 1. Python
-    ```
+    ```Python
     import numpy as np
     import pylia
     import matplotlib.pyplot as plt
