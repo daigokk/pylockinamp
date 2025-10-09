@@ -1,5 +1,6 @@
 import subprocess
 import os
+import time
 import numpy as np
 
 
@@ -26,6 +27,23 @@ class pylia:
   def _query(self, cmd):
     self._send(cmd)
     return self._recieve()
+  def get_help(self):
+    size = int(self._query('help:size?'))
+    self._send('help?')
+    for i in range(size):
+      print(self._recieve())
+    return
+  def get_idn(self):
+    return self._query('*idn?')
+  def set_reset(self):
+    self._send('*rst')
+    return
+  def set_pause(self):
+    self._send('pause')
+    return
+  def set_run(self):
+    self._send('run')
+    return
   def get_raw(self):
     dat = []
     size = int(self._query(':data:raw:size?'))
@@ -33,6 +51,8 @@ class pylia:
     for i in range(size):
       dat.append(list(map(float,self._recieve().split(','))))
     return np.array(dat)
+  def get_xy(self):
+    return list(map(float,self._query(':data:xy?').split(',')))
   def get_txy(self, sec=0):
     dat = []
     size = int(self._query(f':data:txy? {sec}'))
