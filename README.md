@@ -10,6 +10,6 @@ Python wrapper of LIA
       - W1 → CH1+
       - GND → CH1−
 1. pip install
-  ```
-  > pip install -U git+https://github.com/daigokk/pylia.git
-  ```
+      ```
+      > pip install -U git+https://github.com/daigokk/pylia.git
+      ```
