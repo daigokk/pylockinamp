@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 
-class pylia:
+class pyliamp:
     """
     Python wrapper for the LIA executable.
 
