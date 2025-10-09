@@ -27,3 +27,4 @@ include = ["pylockinamp"]
 
 [tool.setuptools.package-data]
 pylockinamp = ["bin/lia.exe"]
+exclude = ["pylockinamp.bin*"]
