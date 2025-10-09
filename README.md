@@ -1,4 +1,4 @@
-# pyliamp
+# pylockinamp
 - This Python library is a wrapper of LIA project.
 - The LIA is a project that implements a real-time software lock-in amplifier with Digilent Analog Discovery device on Windows.
   - https://github.com/daigokk/LIA/
@@ -19,7 +19,7 @@
     import numpy as np
     import matplotlib.pyplot as plt
     import time
-    import pyliamp
+    import pylockinamp
     
     def makeChart(dat:np.array):
       fig, ax = plt.subplots(1, 2, figsize=(3*2,3))
@@ -37,7 +37,7 @@
       fig.tight_layout()
       fig.savefig('chart.svg')
     
-    lia = pyliamp()
+    lia = pylockinamp()
     time.sleep(5)
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
