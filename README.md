@@ -1,6 +1,5 @@
 # pylia
-Python wrapper of LIA
-LIA project: https://github.com/daigokk/LIA/
+    Python wrapper of LIA project: https://github.com/daigokk/LIA/
 ## Usage
 1. Install Dependencies
     - [Digilent WaveForms SDK](https://digilent.com/reference/software/waveforms/waveforms-sdk/start)
