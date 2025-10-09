@@ -12,14 +12,14 @@
       - GND → CH1−
 1. pip install
     ```
-    > pip install -U git+https://github.com/daigokk/pylia.git
+    > pip install -U git+https://github.com/daigokk/pyliamp.git
     ```
 1. Python
     ```Python
     import numpy as np
     import matplotlib.pyplot as plt
     import time
-    import pylia
+    import pyliamp
     
     def makeChart(dat:np.array):
       fig, ax = plt.subplots(1, 2, figsize=(3*2,3))
@@ -37,7 +37,7 @@
       fig.tight_layout()
       fig.savefig('chart.svg')
     
-    lia = pylia()
+    lia = pyliamp()
     time.sleep(5)
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
