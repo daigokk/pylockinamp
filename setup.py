@@ -5,6 +5,14 @@ setup(
     version="2.0.0",
     description="Python wrapper of LIA",
     author="daigokk",
-    packages=find_packages(),
-    install_requires=[],
+    packages=['windows_only_package'],
+    platforms=['Windows'],
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        numpy,
+    ],
 )
