@@ -5,7 +5,7 @@ setup(
     version='2.0.0',
     description='Python wrapper of LIA',
     author='daigokk',
-    packages=['windows_only_package'],
+    packages=find_packages(),
     platforms=['Windows'],
     include_package_data=True,  # MANIFEST.in に従って追加ファイルを含める
     package_data={
