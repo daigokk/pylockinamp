@@ -1,1 +1,1 @@
-include my_package/bin/mytool.exe
+include pylia/bin/lia.exe
