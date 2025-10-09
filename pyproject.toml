@@ -3,7 +3,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyliamp"
+name = "pylockinamp"
 version = "2.0.0"
 description = "Python wrapper of LIA"
 readme = "README.md"
@@ -16,14 +16,14 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/daigokk/pyliamp"
+Homepage = "https://github.com/daigokk/pylockinamp"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pyliamp"]
+include = ["pylockinamp"]
 
 [tool.setuptools.package-data]
-pyliamp = ["pyliamp/bin/lia.exe"]
+pyliamp = ["pylockinamp/bin/lia.exe"]
