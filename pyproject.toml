@@ -7,7 +7,7 @@ name = "pylockinamp"
 version = "2.0.0"
 description = "Python wrapper of LIA"
 readme = "README.md"
-license = { text = "MIT" }
+license-files = ["LICENSE"]
 authors = [
   { name = "daigokk" }
 ]
