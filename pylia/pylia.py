@@ -13,7 +13,7 @@ class pylia:
 
     References
     ----------
-    LIA project: https://github.com/daigokk/LIA/tree/master
+    LIA project: https://github.com/daigokk/LIA/
     """
 
     def __init__(self, option=''):
