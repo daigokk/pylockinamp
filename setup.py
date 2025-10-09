@@ -7,6 +7,10 @@ setup(
     author='daigokk',
     packages=['windows_only_package'],
     platforms=['Windows'],
+    include_package_data=True,  # MANIFEST.in に従って追加ファイルを含める
+    package_data={
+        'pylia': ['bin/lia.exe'],  # バイナリを含める
+    },
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
