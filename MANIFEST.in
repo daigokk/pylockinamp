@@ -1,1 +1,1 @@
-include bin/lia.exe
+include pylia/bin/lia.exe
