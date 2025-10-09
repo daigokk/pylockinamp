@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pylia"
+version = "2.0.0"
+description = "Python wrapper of LIA"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "daigokk" }
+]
+dependencies = [
+  "numpy"
+]
+
+[project.urls]
+Homepage = "https://github.com/daigokk/pylia"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pylia"]
+
+[tool.setuptools.package-data]
+pylia = ["bin/lia.exe"]
