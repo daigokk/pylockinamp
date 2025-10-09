@@ -12,7 +12,7 @@
       - GND → CH1−
 1. pip install
     ```
-    > pip install -U git+https://github.com/daigokk/pyliamp.git
+    > pip install -U git+https://github.com/daigokk/pylockinamp.git
     ```
 1. Python
     ```Python
