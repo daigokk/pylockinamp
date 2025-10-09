@@ -2,7 +2,7 @@ import subprocess
 import numpy as np
 
 
-class Lia:
+class pylia:
   def __init__(self, option=''):
     exe_path = os.path.join(os.path.dirname(__file__), 'bin', 'lia.exe')
     self.process = subprocess.Popen(
