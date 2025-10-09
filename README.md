@@ -16,9 +16,9 @@ Python wrapper of LIA
 1. Python
     ```Python
     import numpy as np
-    import pylia
     import matplotlib.pyplot as plt
     import time
+    import pylia
     
     def makeChart(dat:np.array):
       fig, ax = plt.subplots(1, 2, figsize=(3*2,3))
@@ -37,6 +37,6 @@ Python wrapper of LIA
       fig.savefig('chart.svg')
     
     lia = pylia()
-    time.sleep(10)
+    time.sleep(5)
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
