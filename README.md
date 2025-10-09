@@ -1,5 +1,7 @@
 # pyliamp
-    Python wrapper of LIA project: https://github.com/daigokk/LIA/
+    - This Python library is a wrapper of LIA project.
+    - LIA is a project that implements a real-time software lock-in amplifier on Windows.
+        https://github.com/daigokk/LIA/
 ## Usage
 1. Install Dependencies
     - [Digilent WaveForms SDK](https://digilent.com/reference/software/waveforms/waveforms-sdk/start)
