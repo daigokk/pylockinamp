@@ -26,4 +26,4 @@ where = ["."]
 include = ["pylockinamp"]
 
 [tool.setuptools.package-data]
-pyliamp = ["bin/lia.exe"]
+pyliamp = ["pylockinamp/bin/lia.exe"]
