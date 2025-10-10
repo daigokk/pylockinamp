@@ -356,41 +356,14 @@ class pylockinamp:
         print(self.get_idn())
         print(self.get_help())
         previousW1Freq = self.get_fgFreq(0)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousW1Amp = self.get_fgAmp(0)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousW1Phase = self.get_fgPahse(0)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousW2Freq = self.get_fgFreq(1)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousW2Amp = self.get_fgAmp(1)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousW2Phase = self.get_fgPahse(1)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousCh1OffsetPhase = self.get_offsetPhase(0)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousCh2OffsetPhase = self.get_offsetPhase(0)
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         previousCh2DispStatus = self.get_ch2state()
-        ret = self.get_lastError()
-        if ret != 'No error.':
-            raise ValueError(f'Device error detected. {ret}')
         print('previousW1Freq: ', previousW1Freq)
         print('previousW1Amp: ', previousW1Amp)
         print('previousW1Phase: ', previousW1Phase)
@@ -402,8 +375,14 @@ class pylockinamp:
         print('previousCh2DispStatus: ', previousCh2DispStatus)
 
         self.set_reset()
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
         w1freq = 12e3
         self.set_fgFreq(w1freq, 0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
         ret = self.get_fgFreq(0)
         print('get freq: ', ret)
         if w1freq != ret:
