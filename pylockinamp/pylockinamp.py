@@ -147,7 +147,7 @@ class pylockinamp:
         Returns
         -------
         numpy.ndarray
-            2D array of float values.
+            2D array of shape (N, 2) or (N, 3), where N is the number of samples.
         """
         dat = []
         size = int(self._query(':data:raw:size?'))
@@ -187,24 +187,31 @@ class pylockinamp:
             dat.append(list(map(float, self._recieve().split(','))))
         return np.array(dat)
 
-    def get_fgFreq(self):
+    def get_fgFreq(self, ch=0):
         """
-        Get the frequency of the function generator 'W1'.
+        Get the frequency of the function generator.
+
+        Parameters
+        ----------
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
 
         Returns
         -------
         float
             Frequency value.
         """
-        return float(self._query(':w1:freq?'))
+        return float(self._query(f':w{ch+1}:freq?'))
 
-    def set_fgFreq(self, freq):
+    def set_fgFreq(self, freq, ch=0):
         """
-        Set the frequency of the function generator 'W1'.
+        Set the frequency of the function generator.
 
         Parameters
         ----------
         freq : float
             Frequency value to set.
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
         """
-        self._send(f':w1:freq {freq}\n')
+        self._send(f':w{ch+1}:freq {freq}\n')
