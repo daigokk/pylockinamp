@@ -14,7 +14,7 @@
     ```
     > pip install -U git+https://github.com/daigokk/pylockinamp.git
     ```
-1. Python
+1. Python sample code
     ```Python
     import numpy as np
     import matplotlib.pyplot as plt
