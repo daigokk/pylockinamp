@@ -120,6 +120,17 @@ class pylockinamp:
         """
         self._send('*rst')
 
+    def get_lastError(self):
+        """
+        Retrieve the last error message from the device.
+
+        Returns
+        -------
+        str
+            Last error message.
+        """
+        return self._query('error?')
+
     def set_pause(self):
         """
         Pause the device operation.
@@ -139,6 +150,39 @@ class pylockinamp:
         None
         """
         self._send('run')
+
+    def get_ch2state(self):
+        """
+        Check if channel 2 display is enabled.
+        Returns
+        -------
+        bool
+            True if channel 2 display is enabled, False otherwise.
+        """
+        ret = self._query(':chan2:disp?')
+        if ret == 'on':
+            return True
+        else:
+            return False
+
+    def set_ch2state(self, state:bool):
+        """
+        Enable or disable the display of channel 2.
+
+        Parameters
+        ----------
+        state : bool
+            True to enable, False to disable.
+
+        Returns
+        -------
+        None
+        
+        """
+        if state:
+            self._send(':chan2:disp on')
+        else:
+            self._send(':chan2:disp off')
 
     def get_raw(self):
         """
@@ -215,3 +259,194 @@ class pylockinamp:
             Channel number. Default is 0. Then ch=0 corresponds to w1.
         """
         self._send(f':w{ch+1}:freq {freq}\n')
+
+    def get_fgAmp(self, ch=0):
+        """
+        Get the amplitude of the function generator.
+        Parameters
+        ----------
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
+        Returns
+        -------
+        float
+            Amplitude value.
+        """
+        return float(self._query(f':w{ch+1}:amp?'))
+
+    def set_fgAmp(self, amp, ch=0):
+        """
+        Set the amplitude of the function generator.
+
+        Parameters
+        ----------
+        amp : float
+            Amplitude value to set.
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
+        """
+        self._send(f':w{ch+1}:amp {amp}\n')
+
+    def get_fgPahse(self, ch=0):
+        """
+        Get the phase of the function generator.
+
+        Parameters
+        ----------
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
+        Returns
+        -------
+        float
+            Phase value in degrees.
+        """
+        return float(self._query(f':w{ch+1}:phase?'))
+    
+    def set_fgPhase(self, phase, ch=0):
+        """
+        Set the phase of the function generator.
+
+        Parameters
+        ----------
+        phase : float
+            Phase value to set in degrees.
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to w1.
+        """
+        self._send(f':w{ch+1}:phase {phase}\n')
+
+    def get_offsetPhase(self, ch=0):
+        """
+        Get the offset phase for the channel.
+
+        Parameters
+        ----------
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to ch1.
+
+        Returns
+        -------
+        float
+            Offset phase value in degrees.
+        """
+        return float(self._query(f':calc{ch+1}:offset:phase?'))
+
+    def set_offsetPhase(self, phase, ch=0):
+        """
+        Set the offset phase for the channel.
+
+        Parameters
+        ----------
+        phase : float
+            Offset phase value to set in degrees.
+        ch : int, optional
+            Channel number. Default is 0. Then ch=0 corresponds to ch1.
+        """
+        self._send(f':calc{ch+1}:offset:phase {phase}\n')
+
+    def _test(self):
+        """
+        Test function of all commands.
+
+        Returns
+        -------
+        Charactor strings
+        """
+        print('Start test...')
+        print(self.get_idn())
+        print(self.get_help())
+        previousW1Freq = self.get_fgFreq(0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousW1Amp = self.get_fgAmp(0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousW1Phase = self.get_fgPahse(0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousW2Freq = self.get_fgFreq(1)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousW2Amp = self.get_fgAmp(1)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousW2Phase = self.get_fgPahse(1)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousCh1OffsetPhase = self.get_offsetPhase(0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousCh2OffsetPhase = self.get_offsetPhase(0)
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        previousCh2DispStatus = self.get_ch2state()
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        print('previousW1Freq: ', previousW1Freq)
+        print('previousW1Amp: ', previousW1Amp)
+        print('previousW1Phase: ', previousW1Phase)
+        print('previousW2Freq: ', previousW2Freq)
+        print('previousW2Amp: ', previousW2Amp)
+        print('previousW2Phase: ', previousW2Phase)
+        print('previousCh1OffsetPhase: ', previousCh1OffsetPhase)
+        print('previousCh2OffsetPhase: ', previousCh2OffsetPhase)
+        print('previousCh2DispStatus: ', previousCh2DispStatus)
+
+        self.set_reset()
+        w1freq = 12e3
+        self.set_fgFreq(w1freq, 0)
+        ret = self.get_fgFreq(0)
+        print('get freq: ', ret)
+        if w1freq != ret:
+            raise ValueError('Frequency setting failed.')
+        w1amp = 0.5
+        self.set_fgAmp(w1amp, 0)
+        ret = self.get_fgAmp(0)
+        print('get amp: ', ret)
+        if w1amp != ret:
+            raise ValueError('Amplitude setting failed.')
+        self.set_ch2state(True)
+        
+        ch1offsetPhase = 30
+        self.set_offsetPhase(ch1offsetPhase, 0)
+        ret = self.get_offsetPhase(0)
+        print('offset phase: ', ret)
+        if ch1offsetPhase != ret:
+            raise ValueError('Offset phase setting failed.')
+        
+        ret = self.get_xy()
+        print('xy:', ret)
+        if len(ret) != 4:
+            raise ValueError('XY data size error.')
+        self.set_pause()
+        ret = self.get_lastError()
+        if ret != 'No error.':
+            raise ValueError(f'Device error detected. {ret}')
+        ret = self.get_raw()
+        if ret.shape != (5000, 3):
+            raise ValueError('Raw data size error.')
+        ret = self.get_txy(1)
+        print('ret[0]', ret[0])
+        if len(ret[0]) != 5:
+            raise ValueError(f'Time-series XY data size error. {ret.shape[0]}')
+        self.set_run()
+        self.set_reset()
+        self.set_fgFreq(previousW1Freq, 0)
+        self.set_fgAmp(previousW1Amp, 0)
+        self.set_fgPhase(previousW1Phase, 0)
+        self.set_fgFreq(previousW2Freq, 1)
+        self.set_fgAmp(previousW2Amp, 1)
+        self.set_fgPhase(previousW2Phase, 1)
+        self.set_offsetPhase(previousCh1OffsetPhase, 0)
+        self.set_offsetPhase(previousCh2OffsetPhase, 1)
+        self.set_ch2state(previousCh2DispStatus)
+        print("Test finished.")
