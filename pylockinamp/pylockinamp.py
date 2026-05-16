@@ -4,7 +4,7 @@ import time
 import numpy as np
 
 
-class pylockinamp:
+class Lia:
     """
     Python wrapper for the LIA executable.
 
