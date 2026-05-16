@@ -37,7 +37,7 @@
       fig.tight_layout()
       fig.savefig('chart.svg')
     
-    lia = pylockinamp()
+    lia = pylockinamp.Lia()
     time.sleep(5)
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
