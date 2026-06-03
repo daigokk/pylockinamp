@@ -147,7 +147,7 @@ class Lia:
         cmd = f'data:fft:save {filename}'.strip()
         self._send(cmd)
 
-    def get_xy(self, n:int=1, waitsec:float=0.0):
+    def get_xy(self, n=1, waitsec=0.0):
         """Retrieve the latest XY data from the device."""
         xys = np.array(list(map(float, self._query(':data:xy?').split(','))))
         for i in range(n-1):
