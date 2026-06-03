@@ -236,7 +236,7 @@ class Lia:
         return float(self._query('post:lpf:freq?'))
 
     def set_lpf_freq(self, freq: float):
-        """Set the Low-Pass Filter frequency (10 to 100 Hz)."""
+        """Set the Low-Pass Filter frequency (1 to 100 Hz)."""
         self._send(f'post:lpf:freq {freq}')
 
     # ============================================================
