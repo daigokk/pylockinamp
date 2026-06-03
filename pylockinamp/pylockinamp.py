@@ -147,9 +147,13 @@ class Lia:
         cmd = f'data:fft:save {filename}'.strip()
         self._send(cmd)
 
-    def get_xy(self):
+    def get_xy(self, n:int=1, waitsec:float=0.0):
         """Retrieve the latest XY data from the device."""
-        return list(map(float, self._query('data:xy?').split(',')))
+        xys = np.array(list(map(float, self._query(':data:xy?').split(','))))
+        for i in range(n-1):
+            time.sleep(waitsec)
+            xys += np.array(list(map(float, self._query(':data:xy?').split(','))))
+        return xys/n
 
     def get_txy(self, sec=0.0):
         """Retrieve time-series XY data for a given duration."""
