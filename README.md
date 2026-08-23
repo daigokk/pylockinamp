@@ -38,7 +38,7 @@
       fig.savefig('chart.svg')
     
     lia = pylockinamp.Lia()
-    time.sleep(10)
+    time.sleep(2) # DAQが安定するまで待機
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
 ![Chart](https://github.com/daigokk/LIA/blob/master/docs/images/Chart.svg)
