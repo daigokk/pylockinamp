@@ -41,3 +41,4 @@
     time.sleep(5)
     makeChart(lia.get_txy()) # Save time series and XY(Lissajous) plots of X/Y components
     ```
+https://github.com/daigokk/LIA/blob/master/docs/images/Chart.svg
